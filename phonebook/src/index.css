@@ -1,0 +1,7 @@
+.error {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: lightgrey;
+  border: 0.2rem solid;
+  border-radius: 0.25rem;
+}
