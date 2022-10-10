@@ -1,0 +1,1 @@
+{"id":"90014829-92bf-49ad-9600-6c724504eca2","space":34671,"runtime":"nodejs14.x","name":"full-stack-open-phonebook","path":"43svbc","project":"a0shy6gw","account":"144798365827","region":"eu-central-1","deps":null,"envs":["MONGODB_URI","PORT"],"public":true,"log_level":"off","cron":""}
