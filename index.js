@@ -86,7 +86,7 @@ app.post('/api/persons', (request, response, next) => {
         :
         person.save()
           .then(savedPerson => {
-            response.json(savedPerson)
+            response.status(201).json(savedPerson)
           }).catch(error => next(error))
     })
     .catch(error => next(error))
@@ -113,9 +113,10 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(errorHandler)
 
-/*
-const PORT = process.env.PORT
-app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
-*/
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT
+  app.listen(PORT)
+  console.log(`Server running on port ${PORT}`)
+}
+
 module.exports = app

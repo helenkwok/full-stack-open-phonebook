@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env node NODE_ENV=production index.js",
+    "dev": "cross-env nodemon NODE_ENV=development index.js",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit",
     "lint": "eslint .",
+    "install:ui": "cd ./phonebook/ && npm install",
     "build:ui": "rm -rf build && cd ./phonebook/ && npm run build && cp -r build ../",
     "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
@@ -31,7 +32,13 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.19.0",
-    "nodemon": "^2.0.18"
+    "jest": "^29.1.2",
+    "nodemon": "^2.0.18",
+    "supertest": "^6.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

@@ -16,7 +16,7 @@ jobs:
       - name: npm install
         run: npm install
       - name: ui npm install
-        run: cd ./phonebook/ && npm install
+        run: npm run install:ui
       - name: lint
         run: npm run lint
       - name: build
@@ -26,3 +26,4 @@ jobs:
         with:
           deta-access-token: ${{ secrets.DETA_TOKEN }}
           deta-name: "full-stack-open-phonebook"
+          deta-project: "fso-phonebook"
