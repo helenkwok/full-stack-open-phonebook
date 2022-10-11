@@ -51,7 +51,7 @@ const Persons = ({persons, setPersons, filter, setMessage, setMessageStyle}) => 
           person.name.toLowerCase()
           .includes(filter.toLowerCase(), 0)
         ).map(person =>
-          <p key={person.name}>
+          <p key={person.name} data-testid='person'>
             {person.name} {person.number}
             <button onClick={() => handleDelete(person.name, person.id)}>delete</button>
           </p>
