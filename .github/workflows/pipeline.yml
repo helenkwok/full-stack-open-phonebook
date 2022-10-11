@@ -29,7 +29,12 @@ jobs:
         env:
           PORT: 3001
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+      - name: ui test
+        run: npm run test:ui
       - name: deploy
+        if: |
+          github.event_name == 'push' &&
+          contains(join(toJson(github.event.commits.*.message), ' '), '#skip') != true
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
           deta-access-token: ${{ secrets.DETA_TOKEN }}
