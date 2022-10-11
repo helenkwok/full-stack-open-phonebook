@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -21,9 +24,27 @@ jobs:
         run: npm run lint
       - name: build
         run: npm run build:ui
+      - name: api test
+        run: npm run test
       - name: deploy
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
           deta-access-token: ${{ secrets.DETA_TOKEN }}
           deta-name: "full-stack-open-phonebook"
           deta-project: "fso-phonebook"
+
+  tag_release:
+    if: |
+      github.event_name == 'push' &&
+      contains(join(toJson(github.event.commits.*.message), ' '), '#skip') != true
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1ffbb2e04bd950cffea99066469cb16d69a7887e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: "patch"
