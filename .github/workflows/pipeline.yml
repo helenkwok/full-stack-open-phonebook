@@ -26,6 +26,9 @@ jobs:
         run: npm run build:ui
       - name: api test
         run: npm run test
+        env:
+          PORT: 3001
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
       - name: deploy
         uses: BogDAAAMN/deta-deploy-action@v1.0.1
         with:
