@@ -33,24 +33,12 @@ jobs:
         run: npm run test:ui
       - name: Start server in the background
         run: npm start &
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
           working-directory: phonebook
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      - name: upload failure screenshots
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-      - name: upload failure videos
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-videos
-          path: cypress/videos
       - name: deploy
         if: |
           github.event_name == 'push' &&
