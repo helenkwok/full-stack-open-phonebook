@@ -48,6 +48,9 @@ jobs:
           deta-access-token: ${{ secrets.DETA_TOKEN }}
           deta-name: "full-stack-open-phonebook"
           deta-project: "fso-phonebook"
+      - name: health check
+        shell: bash
+        run: ./health_check.sh
 
   tag_release:
     if: |
