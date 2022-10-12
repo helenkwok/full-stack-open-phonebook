@@ -7,7 +7,7 @@
     "start": "cross-env node NODE_ENV=production index.js",
     "dev": "cross-env nodemon NODE_ENV=development index.js",
     "test": "jest --verbose --runInBand --forceExit",
-    "test:ui": "cd ./phonebook/ && npm run test",
+    "test:ui": "cd ./phonebook/ && npm run test:nowatch",
     "lint": "eslint .",
     "install:ui": "cd ./phonebook/ && npm install",
     "build:ui": "rm -rf build && cd ./phonebook/ && npm run build && cp -r build ../",

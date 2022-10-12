@@ -31,7 +31,7 @@ describe('api test', () => {
   test('a new blog is successfully created', async () => {
     const newPerson = {
       name: 'Dan Abramov',
-      number: '12-43-234345',
+      number: '124-234345',
     }
 
     await api
