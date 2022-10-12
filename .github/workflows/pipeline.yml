@@ -34,7 +34,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
-          build: npm run build
+          build: npm run build:ui
           start: npm run start
           wait-on: http://localhost:3001
       - name: deploy
