@@ -29,6 +29,10 @@ mongoose.connect(url)
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
+app.get('/health', (_req, res) => {
+  res.send('ok')
+})
+
 app.get('/info', (request, response, next) => {
   Person.estimatedDocumentCount()
     .then(result => {
