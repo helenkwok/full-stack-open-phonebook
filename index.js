@@ -1,9 +1,13 @@
 const express = require('express')
-const app = express()
+const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cors = require('cors')
 require('dotenv').config()
+
 const Person = require('./models/person')
+const config = require('./utils/config')
+
+const app = express()
 
 app.use(express.json())
 
@@ -12,6 +16,16 @@ app.use(cors())
 app.use(express.static('build'))
 
 morgan.token('body', (request) => JSON.stringify(request.body))
+
+const url = config.MONGODB_URI
+
+mongoose.connect(url)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
@@ -113,10 +127,8 @@ const errorHandler = (error, request, response, next) => {
 
 app.use(errorHandler)
 
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT
-  app.listen(PORT)
-  console.log(`Server running on port ${PORT}`)
-}
+const PORT = process.env.PORT || 3001
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
 
 module.exports = app
