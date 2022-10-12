@@ -49,6 +49,9 @@ jobs:
           deta-name: "full-stack-open-phonebook"
           deta-project: "fso-phonebook"
       - name: health check
+        if: |
+            github.event_name == 'push' &&
+            contains(join(toJson(github.event.commits.*.message), ' '), '#skip') != true
         shell: bash
         run: ./health_check.sh
 
