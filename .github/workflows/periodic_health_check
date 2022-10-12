@@ -1,0 +1,15 @@
+name: Periodic Health Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 15 * *' # crontab.guru
+
+jobs:
+  check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: health check
+        uses: jtalk/url-health-check-action@v2.2
+        with:
+          url: https://48y9kj.deta.dev/health
