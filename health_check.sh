@@ -2,7 +2,6 @@
 
 res=$(curl -s https://48y9kj.deta.dev/health)
 
-echo res
 
 if [ "$res" == "ok" ]; then
   echo "Succeeded curl to /health"
