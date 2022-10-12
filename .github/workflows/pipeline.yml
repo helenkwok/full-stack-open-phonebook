@@ -39,6 +39,8 @@ jobs:
           build: npm run build:ui
           start: npm run start
           wait-on: http://localhost:3001
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: deploy
         if: |
           github.event_name == 'push' &&
